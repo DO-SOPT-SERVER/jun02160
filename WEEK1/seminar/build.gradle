@@ -22,9 +22,15 @@ repositories {
 }
 
 dependencies {
+
+	// Spring Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+
+	// default
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
