@@ -1,6 +1,6 @@
 package com.server.dosopt.seminar.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ public class ApiResponse<T> {
     private final String status;
     private final boolean success;
 
-    @JsonIgnore
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
     // 성공
