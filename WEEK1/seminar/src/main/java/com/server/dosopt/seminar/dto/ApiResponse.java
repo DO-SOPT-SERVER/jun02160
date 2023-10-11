@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonPropertyOrder({"status", "message", "data"})
+@JsonPropertyOrder({"code", "status", "success", "data"})
 public class ApiResponse<T> {
 
     private final int code;
