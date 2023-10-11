@@ -1,7 +1,9 @@
 package com.server.dosopt.seminar.controller;
 
+import com.server.dosopt.seminar.dto.ApiResponse;
 import com.server.dosopt.seminar.dto.HealthCheckResponse;
 import com.server.dosopt.seminar.service.Person;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,5 +56,29 @@ public class HealthCheckController {
                 .build();   // 순서 바뀌어도 ㄱㅊ
 
         return ResponseEntity.ok(new HealthCheckResponse("OK"));
+    }
+
+    /**
+     * 심화 과제 테스트용
+     */
+    @GetMapping("/v7")
+    public ApiResponse healthSuccessV7() {
+
+        return ApiResponse.success(HttpStatus.OK);
+    }
+
+    @GetMapping("/v8")
+    public ApiResponse<Person> healthSuccessV8() {
+
+        return ApiResponse.success(HttpStatus.CREATED, Person.builder()
+                .firstName("박")
+                .lastName("예준")
+                .build());
+    }
+
+    @GetMapping("/v9")
+    public ApiResponse healthSuccessV9() {
+
+        return ApiResponse.error(HttpStatus.CONFLICT);
     }
 }

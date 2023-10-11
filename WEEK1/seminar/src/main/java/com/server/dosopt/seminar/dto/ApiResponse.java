@@ -1,17 +1,22 @@
 package com.server.dosopt.seminar.dto;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
+@Getter
 @Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@JsonPropertyOrder({"status", "message", "data"})
 public class ApiResponse<T> {
 
     private final int code;
     private final String status;
     private final boolean success;
+
+    @JsonIgnore
     private T data;
 
     // 성공
