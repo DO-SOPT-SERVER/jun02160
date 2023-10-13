@@ -1,4 +1,4 @@
-package sopt.org.kotlinseminar.service
+package sopt.org.kotlinseminar.domain
 
 import lombok.AccessLevel
 import lombok.Builder

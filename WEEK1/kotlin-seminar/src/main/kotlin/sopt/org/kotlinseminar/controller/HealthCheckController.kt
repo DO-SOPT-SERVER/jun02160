@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import sopt.org.kotlinseminar.dto.HealthCheckResponse
-import sopt.org.kotlinseminar.service.Person
+import sopt.org.kotlinseminar.domain.Person
 
 @RestController
 @RequestMapping("/health")
