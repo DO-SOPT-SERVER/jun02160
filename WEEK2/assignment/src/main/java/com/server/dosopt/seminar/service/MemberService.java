@@ -53,12 +53,15 @@ public class MemberService {
     // 수정
     @Transactional
     public void updateSOPT(Long memberId, MemberProfileUpdateRequest request) {
-        Member member = findMemberById(memberId);
+        Member findMember = findMemberById(memberId);
+        findMember.getSopt().updateSopt(request.generation(), request.part());
+        memberRepository.save(findMember);
+
     }
 
     // 삭제
     public void deleteMember(Long memberId) {
-
+        memberRepository.deleteById(memberId);
     }
 
     private Member findMemberById(Long memberId) {

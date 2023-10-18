@@ -25,4 +25,9 @@ public class SOPT {
 
     @Enumerated(value = STRING)   // STRING으로 명시해주지 않으면 인덱스(smallint 타입)로 저장됨
     private Part part;
+
+    public void updateSopt(int generation, Part part) {
+        this.generation = generation;
+        this.part = part;
+    }
 }
