@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.3"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
+    kotlin("plugin.jpa") version "1.7.22"
 }
 
 group = "sopt.org"
@@ -35,6 +36,17 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // JPA
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+
+}
+
+allOpen {
+    // 엔티티 클래스 정의 시, open 변경자 자동으로 추가
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
 }
 
 tasks.withType<KotlinCompile> {
