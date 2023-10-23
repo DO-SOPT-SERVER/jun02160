@@ -1,4 +1,4 @@
-package sopt.org.kotlinseminar.dto
+package sopt.org.kotlinseminar.common.response
 
 class HealthCheckResponse(
     var status: String
