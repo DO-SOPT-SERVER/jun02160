@@ -12,10 +12,9 @@ import java.net.URI
 
 @RestController
 @RequestMapping("/api/member")
-class MemberController {
-
-    @Autowired
-    lateinit var memberService: MemberService
+class MemberController(
+        private val memberService: MemberService
+) {
 
 
     // 생성
@@ -28,7 +27,7 @@ class MemberController {
 
     // 조회
     @GetMapping("/{memberId}/v2")
-    fun getMemberProfileV1(@PathVariable memberId: Long?): ResponseEntity<MemberGetResponse?>? {
+    fun getMemberProfileV1(@PathVariable memberId: Long): ResponseEntity<MemberGetResponse?>? {
         return ResponseEntity.ok(memberService.getMemberByIdV1(memberId))
     }
 
@@ -37,7 +36,7 @@ class MemberController {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun getMemberProfileV2(@PathVariable memberId: Long?): ResponseEntity<MemberGetResponse?>? {
+    fun getMemberProfileV2(@PathVariable memberId: Long): ResponseEntity<MemberGetResponse?>? {
         return ResponseEntity.ok(memberService.getMemberByIdV2(memberId))
     }
 

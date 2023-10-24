@@ -7,11 +7,11 @@ class MemberGetResponse(
     val name: String = "",
     val nickname: String = "",
     val age: Int,
-    val sopt: Sopt
+    var sopt: Sopt
 ) {
 
     companion object {
-        fun of(member: Member?): MemberGetResponse {
+        fun of(member: Member): MemberGetResponse {
             return MemberGetResponse(
                 name = member.name,
                 nickname = member.nickname,

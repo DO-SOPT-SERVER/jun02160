@@ -15,10 +15,9 @@ import java.util.stream.Collectors
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-class MemberService {
-
-    @Autowired
-    internal var memberRepository: MemberRepository? = null
+class MemberService(
+        private val memberRepository: MemberRepository
+) {
 
     @Transactional
     fun create(request: MemberCreateRequest): String {
@@ -47,9 +46,9 @@ class MemberService {
             ?.collect(Collectors.toList())
     }
 
-    private fun findMemberById(memberId: Long): Member? {
-        return memberRepository?.findById(memberId)   // nullable로 열어둘 경우
-            ?.orElseThrow{ EntityNotFoundException("존재하지 않는 회원입니다.") }
+    private fun findMemberById(memberId: Long): Member {
+        return memberRepository.findById(memberId)   // nullable로 열어둘 경우
+            .orElseThrow{ EntityNotFoundException("존재하지 않는 회원입니다.") }
     }
 
 }
