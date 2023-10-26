@@ -60,6 +60,7 @@ public class MemberService {
     }
 
     // 삭제
+    @Transactional
     public void deleteMember(Long memberId) {
         memberRepository.deleteById(memberId);
     }

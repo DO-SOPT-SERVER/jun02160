@@ -30,7 +30,7 @@ public class MemberController {
 
 
     //조회
-    @GetMapping("/{memberId}/v2")
+    @GetMapping("/{memberId}/v1")
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<MemberGetResponse> getMemberProfileV1(@PathVariable Long memberId) {
         return ApiResponse.success(GET_MEMBER_INFO_SUCCESS, memberService.getMemberByIdV1(memberId));
@@ -60,7 +60,7 @@ public class MemberController {
 
     // 수정
     @PatchMapping("/{memberId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponse updateMemberSoptInfo(@PathVariable Long memberId, @RequestBody MemberProfileUpdateRequest request) {
         memberService.updateSOPT(memberId, request);
         return ApiResponse.success(UPDATE_MEMBER_SUCCESS);
@@ -68,7 +68,7 @@ public class MemberController {
 
     // 삭제
     @DeleteMapping("/{memberId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public ApiResponse deleteMember(@PathVariable Long memberId) {
         memberService.deleteMember(memberId);
         return ApiResponse.success(DELETE_MEMBER_SUCCESS);
