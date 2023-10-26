@@ -2,6 +2,8 @@ package com.server.dosopt.seminar.common.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.server.dosopt.seminar.enums.Error;
+import com.server.dosopt.seminar.enums.Success;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,27 +30,27 @@ public class ApiResponse<T> {
     private T data;
 
     // 성공
-    public static ApiResponse success(HttpStatus httpStatus) {
+    public static ApiResponse success(Success success) {
         return ApiResponse.builder()
-                .code(httpStatus.value())
-                .status(httpStatus.getReasonPhrase())
+                .code(success.getHttpStatusCode())
+                .status(success.getMessage())
                 .success(true)
                 .build();
     }
 
-    public static <T> ApiResponse<T> success(HttpStatus httpStatus, T data) {
+    public static <T> ApiResponse<T> success(Success success, T data) {
         return ApiResponse.<T>builder()
-                .code(httpStatus.value())
-                .status(httpStatus.getReasonPhrase())
+                .code(success.getHttpStatusCode())
+                .status(success.getMessage())
                 .success(true)
                 .data(data)
                 .build();
     }
 
-    public static ApiResponse error(HttpStatus httpStatus) {
+    public static ApiResponse error(Error error) {
         return ApiResponse.builder()
-                .code(httpStatus.value())
-                .status(httpStatus.getReasonPhrase())
+                .code(error.getHttpStatusCode())
+                .status(error.getMessage())
                 .success(false)
                 .build();
     }
