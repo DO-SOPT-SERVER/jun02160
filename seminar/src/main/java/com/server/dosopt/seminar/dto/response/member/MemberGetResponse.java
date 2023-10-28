@@ -1,4 +1,4 @@
-package com.server.dosopt.seminar.dto.response;
+package com.server.dosopt.seminar.dto.response.member;
 
 import com.server.dosopt.seminar.domain.Member;
 import com.server.dosopt.seminar.domain.SOPT;

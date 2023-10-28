@@ -17,7 +17,7 @@ import static jakarta.persistence.EnumType.STRING;
  */
 @Embeddable  // 임베디드 타입 -> 값 타입으로 지정
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 지연로딩을 위해 기본 생성자 필요 (이때, private으로 접근 레벨을 지정하면 프록시 객체를 생성하지 못하므로 protected 이상으로 만들어줘야 함)
 @AllArgsConstructor
 public class SOPT {
 

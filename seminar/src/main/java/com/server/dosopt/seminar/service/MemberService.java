@@ -1,16 +1,15 @@
 package com.server.dosopt.seminar.service;
 
 import com.server.dosopt.seminar.domain.Member;
-import com.server.dosopt.seminar.dto.request.MemberCreateRequest;
-import com.server.dosopt.seminar.dto.request.MemberProfileUpdateRequest;
-import com.server.dosopt.seminar.dto.response.MemberGetResponse;
+import com.server.dosopt.seminar.dto.request.member.MemberCreateRequest;
+import com.server.dosopt.seminar.dto.request.member.MemberProfileUpdateRequest;
+import com.server.dosopt.seminar.dto.response.member.MemberGetResponse;
 import com.server.dosopt.seminar.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,6 +60,7 @@ public class MemberService {
 
     }
 
+    // private 메서드에는 @Transactional 동작 X (프록시 객체를 이용하기 때문)
     private Member findMemberById(Long memberId) {
         return memberRepository.findById(memberId)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
