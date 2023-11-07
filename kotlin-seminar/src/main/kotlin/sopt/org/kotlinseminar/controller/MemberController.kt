@@ -1,11 +1,10 @@
 package sopt.org.kotlinseminar.controller
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import sopt.org.kotlinseminar.dto.request.MemberCreateRequest
-import sopt.org.kotlinseminar.dto.response.MemberGetResponse
+import sopt.org.kotlinseminar.dto.request.member.MemberCreateRequest
+import sopt.org.kotlinseminar.dto.response.member.MemberGetResponse
 import sopt.org.kotlinseminar.service.MemberService
 import java.net.URI
 
