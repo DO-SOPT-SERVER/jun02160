@@ -7,11 +7,12 @@ import jakarta.persistence.Enumerated
 
 @Embeddable
 class Sopt(
-    var generation: Int,
+    generation: Int,
 
     @Column
     @Enumerated(EnumType.STRING)
-    var part: Part
+    val part: Part
 ) {
-
+    final var generation = generation
+        private set
 }

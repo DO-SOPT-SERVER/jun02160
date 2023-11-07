@@ -6,30 +6,32 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import lombok.Builder
 
-@Builder
 @Entity
 class Member(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    @Column
-    var name: String = "",
+    name: String,
 
     nickname: String,
 
-    @Column
-    var age: Int,
+    age: Int,
 
     sopt: Sopt
-
-
 ) {
 
     @Column
+    var name = name
+        protected set
+
+    @Column
     var nickname = nickname
+        protected set   // setter를 외부에서 호출하지 못하도록 막아둔다
+
+    @Column
+    var age = age
         protected set
 
     @Embedded

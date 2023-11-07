@@ -1,11 +1,9 @@
 package sopt.org.kotlinseminar.domain
 
 import lombok.AccessLevel
-import lombok.Builder
 import lombok.NoArgsConstructor
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Builder
 class Person(
     var lastName: String?,
     var firstName: String?

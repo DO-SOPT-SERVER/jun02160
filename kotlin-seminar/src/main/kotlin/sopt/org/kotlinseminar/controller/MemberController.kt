@@ -27,7 +27,7 @@ class MemberController(
 
     // 조회
     @GetMapping("/{memberId}/v2")
-    fun getMemberProfileV1(@PathVariable memberId: Long): ResponseEntity<MemberGetResponse?>? {
+    fun getMemberProfileV1(@PathVariable memberId: Long): ResponseEntity<MemberGetResponse> {
         return ResponseEntity.ok(memberService.getMemberByIdV1(memberId))
     }
 
@@ -41,7 +41,7 @@ class MemberController(
     }
 
     @GetMapping // 목록 조회
-    fun getMembersProfile(): ResponseEntity<List<MemberGetResponse?>?>? {
+    fun getMembersProfile(): ResponseEntity<List<MemberGetResponse>> {
         return ResponseEntity.ok(memberService.getMembers())
     }
 }
