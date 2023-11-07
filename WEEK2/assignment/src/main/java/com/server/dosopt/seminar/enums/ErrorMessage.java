@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum Error {
+public enum ErrorMessage {
 
     /**
      * 400 BAD REQUEST
