@@ -1,5 +1,6 @@
 package com.server.dosopt.seminar.service;
 
+import com.server.dosopt.seminar.domain.Category;
 import com.server.dosopt.seminar.domain.Member;
 import com.server.dosopt.seminar.domain.Post;
 import com.server.dosopt.seminar.dto.request.post.PostCreateRequest;
@@ -9,7 +10,6 @@ import com.server.dosopt.seminar.repository.MemberRepository;
 import com.server.dosopt.seminar.repository.PostJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +21,7 @@ public class PostService {
 
     private final PostJpaRepository postRepository;
     private final MemberRepository memberRepository;  // 연관관계 매핑이 되어 있는 Member의 레포지토리도 주입받아서 사용
+    private final CategoryService categoryService;
 
     @Transactional
     public String create(PostCreateRequest reqeust, Long memberId) {
@@ -36,12 +37,12 @@ public class PostService {
 
     public PostGetResponse getById(Long postId) {
         Post post = findPostById(postId);
-        return PostGetResponse.of(post);
+        return PostGetResponse.of(post, getCategoryByPost(post));
     }
 
     public List<PostGetResponse> getPosts(Long memberId) {
         return postRepository.findAllByMemberId(memberId).stream()
-                .map(post -> PostGetResponse.of(post))
+                .map(post -> PostGetResponse.of(post, getCategoryByPost(post)))
                 .toList();
     }
 
@@ -59,6 +60,10 @@ public class PostService {
     private Post findPostById(Long postId) {
         return postRepository.findById(postId)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 게시글입니다."));
+    }
+
+    private Category getCategoryByPost(Post post) {
+        return categoryService.getByCategoryId(post.getCategoryId());
     }
 
 

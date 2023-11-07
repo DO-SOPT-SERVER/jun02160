@@ -1,5 +1,6 @@
 package com.server.dosopt.seminar.domain;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,9 +33,13 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")  // default: VARCHAR -> TEXT는 이와 같이 명시해주는 게 좋음
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")   // @Column 어노테이션에서 DDL 기본 옵션까지 지정할 수 있도록 지일
     private Member member;   // 엔티티에서는 매핑할 객체 그대로 적어주면 된다! (ID를 적는 것 X)
+
+//    @ManyToOne 사용이 아닌 논리적으로 관계만 맺어두기 위함
+    @Column(name = "category_id")
+    private CategoryId categoryId;
 
     @Builder
     public Post(String title, String content, Member member) {
