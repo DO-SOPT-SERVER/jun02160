@@ -3,9 +3,9 @@ package com.server.dosopt.seminar.controller;
 import static com.server.dosopt.seminar.enums.SuccessMessage.*;
 
 import com.server.dosopt.seminar.common.response.ApiResponse;
-import com.server.dosopt.seminar.dto.request.MemberCreateRequest;
-import com.server.dosopt.seminar.dto.request.MemberProfileUpdateRequest;
-import com.server.dosopt.seminar.dto.response.MemberGetResponse;
+import com.server.dosopt.seminar.dto.request.member.MemberCreateRequest;
+import com.server.dosopt.seminar.dto.request.member.MemberProfileUpdateRequest;
+import com.server.dosopt.seminar.dto.response.member.MemberGetResponse;
 import com.server.dosopt.seminar.service.MemberService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
