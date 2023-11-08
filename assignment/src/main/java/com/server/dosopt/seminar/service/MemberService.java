@@ -1,16 +1,15 @@
 package com.server.dosopt.seminar.service;
 
 import com.server.dosopt.seminar.domain.Member;
-import com.server.dosopt.seminar.dto.request.MemberCreateRequest;
-import com.server.dosopt.seminar.dto.request.MemberProfileUpdateRequest;
-import com.server.dosopt.seminar.dto.response.MemberGetResponse;
+import com.server.dosopt.seminar.dto.request.member.MemberCreateRequest;
+import com.server.dosopt.seminar.dto.request.member.MemberProfileUpdateRequest;
+import com.server.dosopt.seminar.dto.response.member.MemberGetResponse;
 import com.server.dosopt.seminar.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
