@@ -1,8 +1,13 @@
 package com.server.dosopt.seminar.controller;
 
+import static com.server.dosopt.seminar.enums.SuccessMessage.*;
+
+import com.server.dosopt.seminar.common.response.ApiResponse;
+import com.server.dosopt.seminar.common.response.ApiResponse.CreatedApiResponse;
 import com.server.dosopt.seminar.dto.request.post.PostCreateRequest;
 import com.server.dosopt.seminar.dto.request.post.PostUpdateRequest;
 import com.server.dosopt.seminar.dto.response.post.PostGetResponse;
+import com.server.dosopt.seminar.enums.SuccessMessage;
 import com.server.dosopt.seminar.service.PostService;
 import java.net.URI;
 import java.util.List;
@@ -28,33 +33,33 @@ public class PostController {
     private static final String CUSTOM_AUTH_ID = "X-Auth-id";  // 상수(static final)로 관리
 
     @PostMapping
-    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
-                                           @RequestBody PostCreateRequest request) {
+    public CreatedApiResponse createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
+                                        @RequestBody PostCreateRequest request) {
         String postId = postService.create(request, memberId);
         URI location = URI.create("/api/post" + postId);
-        return ResponseEntity.created(location).build();
+        return CreatedApiResponse.success(CREATE_POST_SUCCESS, location);
     }
 
     @GetMapping("/{postId}")
-    public ResponseEntity<PostGetResponse> getPostById(@PathVariable Long postId) {
-        return ResponseEntity.ok(postService.getById(postId));
+    public ApiResponse<PostGetResponse> getPostById(@PathVariable Long postId) {
+        return ApiResponse.success(GET_POST_INFO_SUCCESS, postService.getById(postId));
     }
 
     @GetMapping
-    public ResponseEntity<List<PostGetResponse>> getPosts(@RequestHeader(CUSTOM_AUTH_ID) Long memberId){
-        return ResponseEntity.ok(postService.getPosts(memberId));
+    public ApiResponse<List<PostGetResponse>> getPosts(@RequestHeader(CUSTOM_AUTH_ID) Long memberId){
+        return ApiResponse.success(GET_POST_LIST_SUCCESS, postService.getPosts(memberId));
     }
 
     @PatchMapping("/{postId}")
-    public ResponseEntity<Void> updatePost(@PathVariable Long postId,
+    public ApiResponse updatePost(@PathVariable Long postId,
                                            @RequestBody PostUpdateRequest request) {
         postService.update(request, postId);
-        return ResponseEntity.noContent().build();
+        return ApiResponse.success(UPDATE_POSt_SUCCESS);
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<Void> deletePost(@PathVariable Long postId) {
+    public ApiResponse deletePost(@PathVariable Long postId) {
         postService.delete(postId);
-        return ResponseEntity.noContent().build();
+        return ApiResponse.success(DELETE_MEMBER_SUCCESS);
     }
 }
