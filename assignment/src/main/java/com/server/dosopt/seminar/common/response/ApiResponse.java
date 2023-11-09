@@ -5,13 +5,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.server.dosopt.seminar.enums.ErrorMessage;
 import com.server.dosopt.seminar.enums.SuccessMessage;
 import java.net.URI;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.AccessLevel;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 /**
  * TODO 공통 Response 클래스 -> Record 타입으로 변경할 것
@@ -56,23 +54,5 @@ public class ApiResponse<T> {
                 .status(errorMessage.getMessage())
                 .success(false)
                 .build();
-    }
-
-    @Builder
-    public static class CreatedApiResponse extends ResponseEntity {
-
-        private final BodyBuilder bodyBuilder;
-
-        private CreatedApiResponse(BodyBuilder bodyBuilder) {
-            super(HttpStatus.CREATED);
-            this.bodyBuilder = bodyBuilder;
-        }
-        // 201 Created
-        public static CreatedApiResponse success(SuccessMessage successMessage, URI location) {
-            return CreatedApiResponse.builder()
-                    .bodyBuilder(created(location))
-                    .build();
-        }
-
     }
 }

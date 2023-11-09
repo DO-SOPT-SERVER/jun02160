@@ -1,18 +1,20 @@
 package com.server.dosopt.seminar.controller;
 
-import static com.server.dosopt.seminar.enums.SuccessMessage.*;
+import static com.server.dosopt.seminar.enums.SuccessMessage.CREATE_POST_SUCCESS;
+import static com.server.dosopt.seminar.enums.SuccessMessage.DELETE_MEMBER_SUCCESS;
+import static com.server.dosopt.seminar.enums.SuccessMessage.GET_POST_INFO_SUCCESS;
+import static com.server.dosopt.seminar.enums.SuccessMessage.GET_POST_LIST_SUCCESS;
+import static com.server.dosopt.seminar.enums.SuccessMessage.UPDATE_POSt_SUCCESS;
 
 import com.server.dosopt.seminar.common.response.ApiResponse;
-import com.server.dosopt.seminar.common.response.ApiResponse.CreatedApiResponse;
 import com.server.dosopt.seminar.dto.request.post.PostCreateRequest;
 import com.server.dosopt.seminar.dto.request.post.PostUpdateRequest;
 import com.server.dosopt.seminar.dto.response.post.PostGetResponse;
-import com.server.dosopt.seminar.enums.SuccessMessage;
 import com.server.dosopt.seminar.service.PostService;
+import jakarta.servlet.http.HttpServletResponse;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -33,11 +35,12 @@ public class PostController {
     private static final String CUSTOM_AUTH_ID = "X-Auth-id";  // 상수(static final)로 관리
 
     @PostMapping
-    public CreatedApiResponse createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
-                                        @RequestBody PostCreateRequest request) {
+    public ApiResponse createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
+                                    @RequestBody PostCreateRequest request, HttpServletResponse response) {
         String postId = postService.create(request, memberId);
         URI location = URI.create("/api/post" + postId);
-        return CreatedApiResponse.success(CREATE_POST_SUCCESS, location);
+        response.setHeader("Location", location.toString());  // 응답 헤더에 Location 값 설정
+        return ApiResponse.success(CREATE_POST_SUCCESS);
     }
 
     @GetMapping("/{postId}")
