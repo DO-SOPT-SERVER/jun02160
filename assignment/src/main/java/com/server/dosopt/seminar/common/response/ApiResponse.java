@@ -50,34 +50,6 @@ public class ApiResponse<T> {
     }
 
 
-
-    @Builder
-    public static class CreatedApiResponse extends ResponseEntity {
-
-        private BodyBuilder bodyBuilder;
-
-        private final int code;
-        private final String status;
-        private final boolean success;
-        private CreatedApiResponse(BodyBuilder bodyBuilder, int code, String status, boolean success) {
-            super(HttpStatus.CREATED);
-            this.bodyBuilder = bodyBuilder;
-            this.code = code;
-            this.status = status;
-            this.success = success;
-        }
-
-        // 201 Createrd
-        public static CreatedApiResponse success(SuccessMessage successMessage, URI location) {
-            return CreatedApiResponse.builder()
-                    .bodyBuilder(created(location))
-                    .code(successMessage.getHttpStatusCode())
-                    .status(successMessage.getMessage())
-                    .success(true)
-                    .build();
-        }
-    }
-
     public static ApiResponse error(ErrorMessage errorMessage) {
         return ApiResponse.builder()
                 .code(errorMessage.getHttpStatusCode())
@@ -86,4 +58,21 @@ public class ApiResponse<T> {
                 .build();
     }
 
+    @Builder
+    public static class CreatedApiResponse extends ResponseEntity {
+
+        private final BodyBuilder bodyBuilder;
+
+        private CreatedApiResponse(BodyBuilder bodyBuilder) {
+            super(HttpStatus.CREATED);
+            this.bodyBuilder = bodyBuilder;
+        }
+        // 201 Created
+        public static CreatedApiResponse success(SuccessMessage successMessage, URI location) {
+            return CreatedApiResponse.builder()
+                    .bodyBuilder(created(location))
+                    .build();
+        }
+
+    }
 }

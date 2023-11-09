@@ -52,7 +52,7 @@ public class PostController {
 
     @PatchMapping("/{postId}")
     public ApiResponse updatePost(@PathVariable Long postId,
-                                           @RequestBody PostUpdateRequest request) {
+                                            @RequestBody PostUpdateRequest request) {
         postService.update(request, postId);
         return ApiResponse.success(UPDATE_POSt_SUCCESS);
     }
