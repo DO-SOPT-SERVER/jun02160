@@ -5,6 +5,7 @@ import com.server.dosopt.seminar.dto.request.post.PostUpdateRequest;
 import com.server.dosopt.seminar.dto.response.post.PostGetResponse;
 import com.server.dosopt.seminar.service.PostService;
 import java.net.URI;
+import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,10 @@ public class PostController {
     private static final String CUSTOM_AUTH_ID = "X-Auth-id";  // 상수(static final)로 관리
 
     @PostMapping
-    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
-                                           @RequestBody PostCreateRequest request) {
+    public ResponseEntity<Void> createPost(@RequestBody PostCreateRequest request, Principal principal) {
+        Long memberId = Long.valueOf(principal.getName());
         String postId = postService.create(request, memberId);
+
         URI location = URI.create("/api/post" + postId);
         return ResponseEntity.created(location).build();
     }
