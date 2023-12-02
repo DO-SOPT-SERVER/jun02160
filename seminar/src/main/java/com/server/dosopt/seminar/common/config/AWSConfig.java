@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.auth.credentials.SystemPropertyCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 @Configuration
 public class AWSConfig {
@@ -43,6 +44,19 @@ public class AWSConfig {
     @Bean
     public S3Client getS3Client() {
         return S3Client.builder()
+                .region(getRegion())
+                .credentialsProvider(systemPropertyCredentialsProvider())
+                .build();
+    }
+
+    /**
+     * 서버에서 정적 파일을 관리하는 부담을 덜어주기 위해, Presigned Url을 사용하는 방식이 많이 사용됨
+     * -> 클라이언트에 파일 저장 경로에 대한 요청과 응답 후,
+     * @return
+     */
+    @Bean
+    S3Presigner getS3Presigner() {
+        return S3Presigner.builder()
                 .region(getRegion())
                 .credentialsProvider(systemPropertyCredentialsProvider())
                 .build();
