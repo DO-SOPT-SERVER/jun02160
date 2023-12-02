@@ -20,7 +20,7 @@ public class ServiceMemberService {
     @Transactional
     public String create(ServiceMemberRequest request) {
         ServiceMember serviceMember = ServiceMember.builder()
-                .nickanme(request.nickname())
+                .nickname(request.nickname())
                 .password(passwordEncoder.encode(request.password()))  // 암호화하여 저장
                 .build();
         serviceMemberRepository.save(serviceMember);
