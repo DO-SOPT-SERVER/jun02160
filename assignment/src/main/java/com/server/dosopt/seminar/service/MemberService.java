@@ -1,9 +1,11 @@
 package com.server.dosopt.seminar.service;
 
+import com.server.dosopt.seminar.common.exception.BusinessException;
 import com.server.dosopt.seminar.domain.Member;
 import com.server.dosopt.seminar.dto.request.member.MemberCreateRequest;
 import com.server.dosopt.seminar.dto.request.member.MemberProfileUpdateRequest;
 import com.server.dosopt.seminar.dto.response.member.MemberGetResponse;
+import com.server.dosopt.seminar.enums.ErrorMessage;
 import com.server.dosopt.seminar.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -66,7 +68,7 @@ public class MemberService {
 
     private Member findMemberById(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new BusinessException(ErrorMessage.NOT_FOUND_USER));
     }
 
 

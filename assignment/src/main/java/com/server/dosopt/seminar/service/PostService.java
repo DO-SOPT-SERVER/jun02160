@@ -1,11 +1,13 @@
 package com.server.dosopt.seminar.service;
 
+import com.server.dosopt.seminar.common.exception.BusinessException;
 import com.server.dosopt.seminar.domain.Category;
 import com.server.dosopt.seminar.domain.Member;
 import com.server.dosopt.seminar.domain.Post;
 import com.server.dosopt.seminar.dto.request.post.PostCreateRequest;
 import com.server.dosopt.seminar.dto.request.post.PostUpdateRequest;
 import com.server.dosopt.seminar.dto.response.post.PostGetResponse;
+import com.server.dosopt.seminar.enums.ErrorMessage;
 import com.server.dosopt.seminar.repository.MemberRepository;
 import com.server.dosopt.seminar.repository.PostJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -59,7 +61,7 @@ public class PostService {
 
     private Post findPostById(Long postId) {
         return postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 게시글입니다."));
+                .orElseThrow(() -> new BusinessException(ErrorMessage.NOT_FOUND_POST));
     }
 
     private Category getCategoryByPost(Post post) {
