@@ -17,7 +17,7 @@ import static jakarta.persistence.EnumType.STRING;
  */
 @Embeddable  // 임베디드 타입 -> 값 타입으로 지정
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // 지연로딩을 위해 기본 생성자 필요 (이때, private으로 접근 레벨을 지정하면 프록시 객체를 생성하지 못하므로 protected 이상으로 만들어줘야 함)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class SOPT {
 
@@ -25,4 +25,9 @@ public class SOPT {
 
     @Enumerated(value = STRING)   // STRING으로 명시해주지 않으면 인덱스(smallint 타입)로 저장됨
     private Part part;
+
+    public void updateSopt(int generation, Part part) {
+        this.generation = generation;
+        this.part = part;
+    }
 }

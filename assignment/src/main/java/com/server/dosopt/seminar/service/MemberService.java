@@ -1,9 +1,11 @@
 package com.server.dosopt.seminar.service;
 
+import com.server.dosopt.seminar.common.exception.BusinessException;
 import com.server.dosopt.seminar.domain.Member;
 import com.server.dosopt.seminar.dto.request.member.MemberCreateRequest;
 import com.server.dosopt.seminar.dto.request.member.MemberProfileUpdateRequest;
 import com.server.dosopt.seminar.dto.response.member.MemberGetResponse;
+import com.server.dosopt.seminar.enums.ErrorMessage;
 import com.server.dosopt.seminar.repository.MemberRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -52,18 +54,21 @@ public class MemberService {
     // 수정
     @Transactional
     public void updateSOPT(Long memberId, MemberProfileUpdateRequest request) {
-        Member member = findMemberById(memberId);
+        Member findMember = findMemberById(memberId);
+        findMember.getSopt().updateSopt(request.generation(), request.part());
+        memberRepository.save(findMember);
+
     }
 
     // 삭제
+    @Transactional
     public void deleteMember(Long memberId) {
-
+        memberRepository.deleteById(memberId);
     }
 
-    // private 메서드에는 @Transactional 동작 X (프록시 객체를 이용하기 때문)
     private Member findMemberById(Long memberId) {
         return memberRepository.findById(memberId)
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
+                .orElseThrow(() -> new BusinessException(ErrorMessage.NOT_FOUND_USER));
     }
 
 
