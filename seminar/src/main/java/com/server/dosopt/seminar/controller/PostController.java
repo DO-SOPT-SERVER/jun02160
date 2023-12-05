@@ -9,11 +9,8 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-<<<<<<< HEAD
 import org.springframework.http.HttpStatus;
-=======
 import lombok.extern.slf4j.Slf4j;
->>>>>>> dc8184cc891741f35a66910866e2cda9013fdba2
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
