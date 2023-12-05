@@ -1,4 +1,4 @@
-package sopt.org.kotlinseminar.dto.request
+package sopt.org.kotlinseminar.dto.request.member
 
 import sopt.org.kotlinseminar.domain.Sopt
 

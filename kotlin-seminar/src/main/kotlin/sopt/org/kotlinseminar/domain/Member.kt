@@ -9,18 +9,18 @@ import jakarta.persistence.Id
 
 @Entity
 class Member(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null,
-
     name: String,
 
     nickname: String,
 
     age: Int,
 
-    sopt: Sopt
-) {
+    sopt: Sopt,
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L
+): BaseTimeEntity() {
 
     @Column
     var name = name

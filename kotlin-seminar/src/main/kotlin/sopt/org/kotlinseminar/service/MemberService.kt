@@ -2,12 +2,11 @@ package sopt.org.kotlinseminar.service
 
 import jakarta.persistence.EntityNotFoundException
 import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import sopt.org.kotlinseminar.domain.Member
-import sopt.org.kotlinseminar.dto.request.MemberCreateRequest
-import sopt.org.kotlinseminar.dto.response.MemberGetResponse
+import sopt.org.kotlinseminar.dto.request.member.MemberCreateRequest
+import sopt.org.kotlinseminar.dto.response.member.MemberGetResponse
 import sopt.org.kotlinseminar.repository.MemberRepository
 import java.util.stream.Collectors
 
