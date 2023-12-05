@@ -8,8 +8,8 @@ import sopt.org.kotlinseminar.domain.Sopt
  * -> 생성자를 직접 호출할 수 없음
  */
 data class MemberGetResponse private constructor(
-    val name: String = "",
-    val nickname: String = "",
+    val name: String,
+    val nickname: String,
     val age: Int,
     var sopt: Sopt
 ) {

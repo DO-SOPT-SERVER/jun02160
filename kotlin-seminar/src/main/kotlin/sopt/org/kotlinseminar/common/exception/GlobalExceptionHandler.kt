@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException::class)
-    fun handleIllegalArgumentException(e: java.lang.IllegalArgumentException?): ResponseEntity<Void> {
+    fun handleIllegalArgumentException(e: java.lang.IllegalArgumentException): ResponseEntity<Void> {
         return ResponseEntity.badRequest().build()
     }
 
@@ -18,7 +18,7 @@ class GlobalExceptionHandler {
      * 커스텀 Exception에 대한 예외처리 (한꺼번에 처리 가능)
      */
     @ExceptionHandler(BusinessException::class)
-    fun handleBusinessException(e: BusinessException?): ResponseEntity<Void> {
+    fun handleBusinessException(e: BusinessException): ResponseEntity<Void> {
         return ResponseEntity.badRequest().build()
     }
 }

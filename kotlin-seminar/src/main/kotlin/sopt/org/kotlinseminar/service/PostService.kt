@@ -37,7 +37,7 @@ class PostService(
 
     fun getPosts(memberId: Long): List<PostGetResponse> {
         return postRepository.findAllByMemberId(memberId).stream()
-                .map { post -> PostGetResponse.of(post) }
+                .map { PostGetResponse.of(it) }
                 .toList()
     }
 
