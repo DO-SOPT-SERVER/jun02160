@@ -17,12 +17,12 @@ public class ServiceMember {
     @GeneratedValue
     private Long id;
 
-    private String nickanme;
+    private String nickname;
     private String password;
 
     @Builder
-    public ServiceMember(String nickanme, String password) {
-        this.nickanme = nickanme;
+    public ServiceMember(String nickname, String password) {
+        this.nickname = nickname;
         this.password = password;
     }
 }
