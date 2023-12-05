@@ -20,8 +20,8 @@ public class AWSConfig {
 
     // 처음부터 @Value로 환경변수를 가져오는 방식이 아닌, final로 상수를 선언하기 위해 생성자에서 @Value로 가져와 넣어주는 방식도 있음!
     public AWSConfig(@Value("${aws-property.access-key}") final String accessKey,
-                     @Value("${aws-property.secret-key}") final String secretKey,
-                     @Value("${aws-property.aws-region}") final String regionString) {
+                        @Value("${aws-property.secret-key}") final String secretKey,
+                        @Value("${aws-property.aws-region}") final String regionString) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
         this.regionString = regionString;
@@ -55,7 +55,7 @@ public class AWSConfig {
      * @return
      */
     @Bean
-    S3Presigner getS3Presigner() {
+    public S3Presigner getS3Presigner() {
         return S3Presigner.builder()
                 .region(getRegion())
                 .credentialsProvider(systemPropertyCredentialsProvider())
