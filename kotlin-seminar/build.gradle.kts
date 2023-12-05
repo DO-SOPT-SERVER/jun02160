@@ -46,6 +46,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.security:spring-security-test")
 
+    // AWS sdk
+    implementation("software.amazon.awssdk:bom:2.21.0")
+    implementation("software.amazon.awssdk:s3:2.21.0")
 
 }
 
