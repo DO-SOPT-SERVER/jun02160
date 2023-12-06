@@ -50,8 +50,14 @@ dependencies {
     implementation("software.amazon.awssdk:bom:2.21.0")
     implementation("software.amazon.awssdk:s3:2.21.0")
 
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
     // Configuration
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
 }
 
 allOpen {
