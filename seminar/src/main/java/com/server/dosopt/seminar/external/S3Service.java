@@ -1,6 +1,7 @@
 package com.server.dosopt.seminar.external;
 
 import com.server.dosopt.seminar.common.config.AWSConfig;
+import com.server.dosopt.seminar.common.exception.BusinessException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
@@ -86,13 +87,13 @@ public class S3Service {
     private void validateExtension(MultipartFile image) {
         String contentType = image.getContentType();
         if (!IMAGE_EXTENSIONS.contains(contentType)) {
-            throw new RuntimeException("이미지 확장자는 jpg, png, webp만 가능합니다.");
+            throw new BusinessException("이미지 확장자는 jpg, png, webp만 가능합니다.");
         }
     }
 
     private void validateFileSize(MultipartFile image) {
         if (image.getSize() > MAX_FILE_SIZE) {
-            throw new RuntimeException("이미지 사이즈는 5MB를 넘을 수 없습니다.");
+            throw new BusinessException("이미지 사이즈는 5MB를 넘을 수 없습니다.");
         }
     }
 

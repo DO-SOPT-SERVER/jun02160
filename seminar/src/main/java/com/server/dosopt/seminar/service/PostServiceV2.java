@@ -50,7 +50,8 @@ public class PostServiceV2 {
             log.info("imageUrl DB에 저장: {}, {}", imageUrl, image);
             return post.getPostId().toString();
         } catch (RuntimeException | IOException e) {  // Checked Exception이므로 try-catch로 잡아서 런타임으로 던져줘야 한다!
-            throw new RuntimeException(e.getMessage());
+            log.info(e.getMessage());
+            throw new BusinessException(e.getMessage());
         }
 
     }
@@ -63,7 +64,8 @@ public class PostServiceV2 {
             s3Service.deleteImage(post.getImageUrl());
             postRepository.deleteById(postId);
         } catch (RuntimeException | IOException e) {
-            throw new RuntimeException(e.getMessage());
+            log.info(e.getMessage());
+            throw new BusinessException(e.getMessage());
         }
     }
 

@@ -51,7 +51,7 @@ public class Post extends BaseTimeEntity {
     }
 
     // 빌더 패턴 사용 시 메소드를 지정하여 빌더패턴을 인식하지 못하는 문제 해결
-    @Builder(builderMethodName = "builderWithImageUrl")
+    @Builder(builderMethodName = "builderWithImageUrl", buildMethodName = "buildWithImageUrl")
     public Post(String title, String content, String imageUrl, Member member) {
         this.title = title;
         this.content = content;
