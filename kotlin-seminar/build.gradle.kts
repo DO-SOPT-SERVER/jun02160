@@ -58,6 +58,8 @@ dependencies {
     // Configuration
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
+    // Validation
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 allOpen {
