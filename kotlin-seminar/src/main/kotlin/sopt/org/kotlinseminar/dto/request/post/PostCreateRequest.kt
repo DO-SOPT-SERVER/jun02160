@@ -19,4 +19,10 @@ class PostCreateRequest(
             false
         }
     }
+
+    fun validateTitle() {
+        if (this.title.isBlank()) {
+            throw IllegalArgumentException("제목은 공백으로만 이뤄질 수 있습니다.")
+        }
+    }
 }
