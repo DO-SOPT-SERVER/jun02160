@@ -1,5 +1,6 @@
 package sopt.org.kotlinseminar.controller
 
+import jakarta.validation.Valid
 import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -27,7 +28,7 @@ class PostController(
 
     @PostMapping
     fun createPost(@RequestHeader(CUSTOM_AUTH_ID) memberId: Long,
-                    @RequestBody request: PostCreateRequest): ResponseEntity<Void>? {
+                    @Valid @RequestBody request: PostCreateRequest): ResponseEntity<Void>? {
         val postId = postService.create(request, memberId)
         val location: URI = URI.create("/api/post" + postId)
         return ResponseEntity.created(location).build()
