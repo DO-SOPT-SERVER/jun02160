@@ -5,13 +5,13 @@ VALUES (1, '유난', '최윤한', 20, 'SERVER', 33),
        (4, '티벳여우', '이태희', 25, 'ANDROID', 33);
 
 
-INSERT INTO POST(POST_ID, TITLE, CONTENT, MEMBER_ID)
+INSERT INTO POST(POST_ID, TITLE, CONTENT, MEMBER_ID, IMAGE_URL)
 VALUES
-    (1, '안녕하세요 제목1', '안녕하세요 내용1', 1),
-    (2, '안녕하세요 제목2', '안녕하세요 내용2', 1),
-    (3, '안녕하세요 제목3', '안녕하세요 내용3', 1),
-    (4, '반갑습니다 제목4', '반갑습니다', 2),
-    (5, '안녕하세요 제목5', '안녕하세요', 3);
+    (1, '안녕하세요 제목1', '안녕하세요 내용1', 1, 'sdsd'),
+    (2, '안녕하세요 제목2', '안녕하세요 내용2', 1, 'img example'),
+    (3, '안녕하세요 제목3', '안녕하세요 내용3', 1, 'img example'),
+    (4, '반갑습니다 제목4', '반갑습니다', 2, 'img example'),
+    (5, '안녕하세요 제목5', '안녕하세요', 3, 'img example');
 
 INSERT INTO CATEGORY(ID, CONTENT)
 VALUES

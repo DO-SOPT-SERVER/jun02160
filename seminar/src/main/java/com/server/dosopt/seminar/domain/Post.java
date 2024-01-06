@@ -33,6 +33,8 @@ public class Post extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT")  // default: VARCHAR -> TEXT는 이와 같이 명시해주는 게 좋음
     private String content;
 
+    private String imageUrl;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")   // @Column 어노테이션에서 DDL 기본 옵션까지 지정할 수 있도록 지일
     private Member member;   // 엔티티에서는 매핑할 객체 그대로 적어주면 된다! (ID를 적는 것 X)
@@ -48,7 +50,22 @@ public class Post extends BaseTimeEntity {
         this.member = member;
     }
 
+    // 빌더 패턴 사용 시 메소드를 지정하여 빌더패턴을 인식하지 못하는 문제 해결
+    @Builder(builderMethodName = "builderWithImageUrl", buildMethodName = "buildWithImageUrl")
+    public Post(String title, String content, String imageUrl, Member member) {
+        this.title = title;
+        this.content = content;
+        this.imageUrl = imageUrl;
+        this.member = member;
+    }
+
+
+
     public void updateContent(String content) {
         this.content = content;
+    }
+
+    public void addCategory(CategoryId categoryId) {
+        this.categoryId = categoryId;
     }
 }
