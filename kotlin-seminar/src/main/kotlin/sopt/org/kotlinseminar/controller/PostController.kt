@@ -17,7 +17,6 @@ import sopt.org.kotlinseminar.dto.response.post.PostGetResponse
 import sopt.org.kotlinseminar.enums.Constant.CUSTOM_AUTH_ID
 import sopt.org.kotlinseminar.service.PostService
 import java.net.URI
-import java.net.URL
 
 @RestController
 @RequestMapping("/api/post")

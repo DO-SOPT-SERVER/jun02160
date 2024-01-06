@@ -4,11 +4,13 @@ import com.server.dosopt.seminar.dto.request.post.PostCreateRequest;
 import com.server.dosopt.seminar.dto.request.post.PostUpdateRequest;
 import com.server.dosopt.seminar.dto.response.post.PostGetResponse;
 import com.server.dosopt.seminar.service.PostService;
+import jakarta.validation.Valid;
 import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/post")
 @RequiredArgsConstructor
@@ -32,8 +35,9 @@ public class PostController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> createPost(@RequestHeader(CUSTOM_AUTH_ID) Long memberId,
-                                           @RequestBody PostCreateRequest request) {
+    public ResponseEntity<Void> createPost(@Valid @RequestBody PostCreateRequest request, Principal principal) {
+        Long memberId = Long.valueOf(principal.getName());
+        log.info("memberId: {}", memberId);
         String postId = postService.create(request, memberId);
 
         URI location = URI.create("/api/post" + postId);

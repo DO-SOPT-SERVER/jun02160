@@ -8,6 +8,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
+
 @Configuration
 public class AWSConfig {
 
@@ -26,7 +27,6 @@ public class AWSConfig {
         this.secretKey = secretKey;
         this.regionString = regionString;
     }
-
 
     // Java System에 환경변수 등록 => 애플리케이션 실행 시 등록된 값을 가져올 수 있다!
     @Bean
@@ -51,7 +51,7 @@ public class AWSConfig {
 
     /**
      * 서버에서 정적 파일을 관리하는 부담을 덜어주기 위해, Presigned Url을 사용하는 방식이 많이 사용됨
-     * -> 클라이언트에 파일 저장 경로에 대한 요청과 응답 후,
+     * -> 클라이언트에 파일 저장 경로에 대해서 요청과 응답을 주고받음
      * @return
      */
     @Bean

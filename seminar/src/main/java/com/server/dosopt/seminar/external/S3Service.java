@@ -1,6 +1,7 @@
 package com.server.dosopt.seminar.external;
 
 import com.server.dosopt.seminar.common.config.AWSConfig;
+
 import com.server.dosopt.seminar.common.exception.BusinessException;
 import java.io.IOException;
 import java.time.Duration;
@@ -14,6 +15,7 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
@@ -25,6 +27,7 @@ public class S3Service {
 
     private static final List<String> IMAGE_EXTENSIONS = Arrays.asList("image/jpeg", "image/png", "image/jpg", "image/webp");  // 특정 형식의 파일 업로드는 제한한다
     private static final Long MAX_FILE_SIZE = 5 * 1024 * 1024L;   // 5MB
+
 
     // 만료시간 1분
     private static final Long PRE_SIGNED_URL_EXPIRE_MINUTE = 1L;
@@ -53,6 +56,7 @@ public class S3Service {
         s3Client.putObject(request, requestBody);
         return key;
     }
+
 
     public PreSignedUrlVO getUploadPreSignedUrl(final String prefix) {
         final String fileName = generateImageFileName();
@@ -87,12 +91,14 @@ public class S3Service {
     private void validateExtension(MultipartFile image) {
         String contentType = image.getContentType();
         if (!IMAGE_EXTENSIONS.contains(contentType)) {
+
             throw new BusinessException("이미지 확장자는 jpg, png, webp만 가능합니다.");
         }
     }
 
     private void validateFileSize(MultipartFile image) {
         if (image.getSize() > MAX_FILE_SIZE) {
+
             throw new BusinessException("이미지 사이즈는 5MB를 넘을 수 없습니다.");
         }
     }

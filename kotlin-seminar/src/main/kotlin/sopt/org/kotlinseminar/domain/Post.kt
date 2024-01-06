@@ -1,6 +1,7 @@
 package sopt.org.kotlinseminar.domain
 
 import jakarta.persistence.*
+import lombok.Builder
 
 @Entity
 class Post(
@@ -9,6 +10,8 @@ class Post(
     content: String,
 
     member: Member,
+
+    imageUrl: String?,
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +29,10 @@ class Post(
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name = "member_id")
     var member = member
+        protected set
+
+    @Column
+    var imageUrl = imageUrl
         protected set
 
     fun updateContent(content: String) {

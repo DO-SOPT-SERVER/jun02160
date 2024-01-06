@@ -25,7 +25,8 @@ class PostService(
         val post = postRepository.save(
                 Post(member = member,
                     title = request.title,
-                    content = request.content)
+                    content = request.content,
+                    imageUrl = null)
         )
         return post.id.toString()
     }
