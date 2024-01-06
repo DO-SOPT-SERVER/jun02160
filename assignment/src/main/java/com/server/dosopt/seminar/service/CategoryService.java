@@ -1,8 +1,10 @@
 package com.server.dosopt.seminar.service;
 
+import com.server.dosopt.seminar.common.exception.BusinessException;
 import com.server.dosopt.seminar.domain.Category;
 import com.server.dosopt.seminar.domain.CategoryId;
 import com.server.dosopt.seminar.dto.response.post.CategoryResponse;
+import com.server.dosopt.seminar.enums.ErrorMessage;
 import com.server.dosopt.seminar.repository.CategoryJpaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +20,11 @@ public class CategoryService {
 
     public Category getByCategoryId(CategoryId categoryId) {
         return categoryJpaRepository.findById(Short.valueOf(categoryId.getCategoryId())).orElseThrow(
-                () -> new EntityNotFoundException("해당하는 카테고리가 없습니다."));
+                () -> new BusinessException(ErrorMessage.NOT_FOUND_CATEGORY));
     }
 
     public CategoryResponse getById(Short id) {
         return CategoryResponse.of(categoryJpaRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("해당하는 카테고리가 없습니다.")));
+                () -> new BusinessException(ErrorMessage.NOT_FOUND_CATEGORY)));
     }
 }

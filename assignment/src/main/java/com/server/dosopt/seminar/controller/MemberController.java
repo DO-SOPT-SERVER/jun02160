@@ -36,8 +36,7 @@ public class MemberController {
         return ApiResponse.success(GET_MEMBER_INFO_SUCCESS, memberService.getMemberByIdV1(memberId));
     }
 
-    // consume: 요청에 들어오는 값 => GET으로 단순 조회하는 작업이므로 produces 실질적으로 사용됨
-    @GetMapping(value = "/{memberId}/v2", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)  // 안전성을 위해 ENUM으로 작성하자 (직접 작성하는 일 지양)
+    @GetMapping(value = "/{memberId}/v2", produces = MediaType.APPLICATION_JSON_VALUE)  // 안전성을 위해 ENUM으로 작성하자 (직접 작성하는 일 지양)
     @ResponseStatus(HttpStatus.OK)
     public ApiResponse<MemberGetResponse> getMemberProfileV2(@PathVariable Long memberId) {
         return ApiResponse.success(GET_MEMBER_INFO_SUCCESS, memberService.getMemberByIdV2(memberId));

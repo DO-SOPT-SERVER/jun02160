@@ -16,6 +16,12 @@ public enum ErrorMessage {
     // Common
     REQUEST_VALIDATION_EXCEPTION(HttpStatus.BAD_REQUEST, "잘못된 요청입니다"),
 
+    /**
+     * 404 NOT FOUND
+     */
+    NOT_FOUND_USER(HttpStatus.NOT_FOUND, "존재하지 않는 회원입니다."),
+    NOT_FOUND_POST(HttpStatus.NOT_FOUND, "존재하지 않는 게시글입니다."),
+    NOT_FOUND_CATEGORY(HttpStatus.NOT_FOUND, "해당하는 카테고리가 없습니다."),
 
     /**
      * 500 INTERNAL SERVER ERROR
