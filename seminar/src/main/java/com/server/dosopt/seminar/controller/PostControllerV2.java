@@ -9,6 +9,8 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+
+@Slf4j
 @RestController
 @RequestMapping("/api/v2/post")
 @RequiredArgsConstructor
@@ -33,9 +37,9 @@ public class PostControllerV2 {
 
     @PostMapping
     public ResponseEntity<Void> createPost(@RequestPart MultipartFile image,
-                                            @RequestBody PostCreateRequest request,
+                                            PostCreateRequest request,
                                             Principal principal) {
-
+        log.info("컨트롤러 요청 성공");
         Long memberId = Long.valueOf(principal.getName());
         URI location = URI.create("/api/post" + postService.createV2(request, image, memberId));
         return ResponseEntity.created(location).build();

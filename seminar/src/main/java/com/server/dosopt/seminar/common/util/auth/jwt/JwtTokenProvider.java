@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 public class JwtTokenProvider {
 
     private static final String MEMBER_ID = "memberId";
+    private static final Long ACCESS_TOKEN_EXPIRATION_TIME = 60 * 1000L * 60 * 24 * 365;  // 액세스 토큰 만료 시간: 1일로 지정
 
     @Value("${jwt.secret}")
     private String JWT_SECRET;
@@ -32,12 +33,13 @@ public class JwtTokenProvider {
         JWT_SECRET = Base64.getEncoder().encodeToString(JWT_SECRET.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String generateToken(Authentication authentication, Long tokenExpirationTime) {
+
+    public String generateToken(Authentication authentication) {
         final Date now = new Date();
         final Claims claims = Jwts.claims()
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + tokenExpirationTime));  // 만료 시간
-
+                .setExpiration(new Date(now.getTime() + ACCESS_TOKEN_EXPIRATION_TIME));  // 만료 시간
+      
         claims.put(MEMBER_ID, authentication.getPrincipal());
 
         return Jwts.builder()

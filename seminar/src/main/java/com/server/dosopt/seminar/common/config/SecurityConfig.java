@@ -28,8 +28,10 @@ public class SecurityConfig {
     private static final String[] AUTH_WHITELIST = {
             "/sign-up",
             "/sign-in",
-            "/**"
-            ,"/"
+            "/**",
+            "/",
+            "/api/users/sign-up",
+            "/api/users/sign-in"
     };
 
     @Bean

@@ -14,10 +14,14 @@ import jakarta.persistence.EntityNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -36,6 +40,8 @@ public class PostServiceV2 {
     public String createV2(PostCreateRequest reqeust, MultipartFile image, Long memberId) {
         try {
             final String imageUrl = s3Service.uploadImage(POST_IMAGE_FOLDER_NAME, image);
+
+            log.info("이미지 요청에서 꺼내기 성공");
             Member member = memberRepository.findByIdOrThrow(memberId);
             Post post = postRepository.save(
                     Post.builderWithImageUrl()
@@ -44,9 +50,12 @@ public class PostServiceV2 {
                             .imageUrl(imageUrl)
                             .member(member)
                             .build());
+
+            log.info("imageUrl DB에 저장: {}, {}", imageUrl, image);
             return post.getPostId().toString();
         } catch (RuntimeException | IOException e) {  // Checked Exception이므로 try-catch로 잡아서 런타임으로 던져줘야 한다!
-            throw new RuntimeException(e.getMessage());
+            log.info(e.getMessage());
+            throw new BusinessException(e.getMessage());
         }
 
     }
@@ -59,7 +68,9 @@ public class PostServiceV2 {
             s3Service.deleteImage(post.getImageUrl());
             postRepository.deleteById(postId);
         } catch (RuntimeException | IOException e) {
-            throw new RuntimeException(e.getMessage());
+
+            log.info(e.getMessage());
+            throw new BusinessException(e.getMessage());
         }
     }
 
